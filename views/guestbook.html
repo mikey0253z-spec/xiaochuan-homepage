@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>留言板 · {{nickname}}</title>
+  <meta name="description" content="给{{nickname}}留言：打个招呼、提个建议，或者只是路过留个脚印。留言审核通过后会显示在这里。">
+  <meta name="theme-color" content="#F6F1E8">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('xc-theme');
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (error) {}
+    })();
+  </script>
+  <link rel="icon" href="{{favicon}}" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="{{touchIcon}}">
+  <link rel="stylesheet" href="assets/css/style.css?v={{assetVersion}}">
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</head>
+<body data-page="guestbook">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <nav class="nav" id="site-nav" aria-label="主导航">
+        <a href="index.html" data-nav="index">首页</a>
+        <a href="about.html" data-nav="about">关于我</a>
+        <a href="guestbook.html" data-nav="guestbook">留言板</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换深色模式">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="打开菜单" aria-controls="site-nav" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container page">
+    <header class="page-head reveal">
+      <p class="eyebrow">Guestbook</p>
+      <h1 class="page-title">留言板</h1>
+      <p class="page-desc">想说什么都可以：打个招呼、提个建议，或者只是路过留个脚印。<br>留言会先经过审核，通过后才会显示在这里。</p>
+    </header>
+
+    <div id="submit-notice" class="form-notice reveal" hidden role="status">
+      <span class="form-notice-icon" aria-hidden="true">✓</span>
+      <div>
+        <strong>留言已提交，等待审核</strong>
+        <p>{{nickname}}审核通过后，你的留言才会显示在下方。感谢你的耐心等待。</p>
+      </div>
+    </div>
+
+    <form id="guestbook-form" class="gb-form reveal" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="nickname">昵称 <span class="req">*</span></label>
+          <input id="nickname" name="nickname" type="text" maxlength="20" placeholder="怎么称呼你？" autocomplete="nickname" required>
+        </div>
+        <div class="field">
+          <label for="email">邮箱 <span class="hint">选填，不会公开</span></label>
+          <input id="email" name="email" type="email" maxlength="120" placeholder="用于显示头像" autocomplete="email">
+        </div>
+        <div class="field full">
+          <label for="website">你的网站 <span class="hint">选填</span></label>
+          <input id="website" name="website" type="text" maxlength="200" placeholder="https://">
+        </div>
+        <div class="field full">
+          <label for="content">留言 <span class="req">*</span></label>
+          <textarea id="content" name="content" maxlength="500" placeholder="写点什么吧……" required></textarea>
+          <div class="field-foot">
+            <div class="emoji-bar" aria-label="插入表情">
+              <button type="button" class="emoji-btn" data-emoji="😊">😊</button>
+              <button type="button" class="emoji-btn" data-emoji="🌿">🌿</button>
+              <button type="button" class="emoji-btn" data-emoji="✨">✨</button>
+              <button type="button" class="emoji-btn" data-emoji="☕">☕</button>
+              <button type="button" class="emoji-btn" data-emoji="🌙">🌙</button>
+              <button type="button" class="emoji-btn" data-emoji="🫶">🫶</button>
+            </div>
+            <span id="char-count" class="char-count">0 / 500</span>
+          </div>
+        </div>
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="extra">请不要填写这一栏</label>
+        <input id="extra" name="extra" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="form-foot">
+        <p id="form-status" class="form-status" role="status"></p>
+        <button type="submit" class="btn btn-primary">提交留言</button>
+      </div>
+    </form>
+
+    <section class="section reveal" aria-labelledby="messages-title">
+      <div class="section-head">
+        <p class="section-label" id="messages-title">大家的留言</p>
+        <p class="section-count" id="message-count"></p>
+      </div>
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <p id="messages-empty" class="empty-state" hidden>还没有留言，来当第一个吧。</p>
+      <div class="load-more-wrap">
+        <button id="load-more" class="btn btn-ghost" type="button" hidden>加载更多</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>{{icp}}</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="assets/js/site.js?v={{assetVersion}}"></script>
+  <script src="assets/js/guestbook.js?v={{assetVersion}}"></script>
+</body>
+</html>

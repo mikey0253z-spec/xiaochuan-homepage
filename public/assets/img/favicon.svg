@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="15" fill="#f6f1e8"/>
+  <circle cx="32" cy="32" r="26" fill="#f0e2d5"/>
+  <text x="32" y="34" text-anchor="middle" dominant-baseline="central" dy="2"
+        font-family="'Noto Serif SC','Songti SC','STSong','SimSun',serif"
+        font-size="32" font-weight="600" fill="#b96a45">川</text>
+</svg>
