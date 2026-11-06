@@ -2,7 +2,14 @@
   "name": "xiaochuan-homepage",
   "version": "1.0.0",
   "private": true,
-  "description": "小川的个人主页：名片、关于我、留言板和审核后台",
+  "description": "小川的个人主页：名片、关于我、留言板，以及完整的站点管理后台",
+  "homepage": "https://www.syuii.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikey0253z-spec/xiaochuan-homepage.git"
+  },
+  "author": "小川",
+  "license": "MIT",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
