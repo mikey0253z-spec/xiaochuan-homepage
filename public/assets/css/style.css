@@ -2473,6 +2473,69 @@ html[data-theme="dark"] .admin-page {
 }
 
 @media (max-width: 760px) {
+  .admin-page .admin-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 4px;
+    border-radius: 16px;
+  }
+
+  .admin-page .admin-tab {
+    justify-content: center;
+    padding: 9px 4px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .admin-page .tab-badge {
+    min-width: 16px;
+    height: 16px;
+    margin-left: 3px;
+    padding: 0 4px;
+    font-size: 10px;
+  }
+
+  .admin-page .tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 5px;
+    border-radius: 18px;
+  }
+
+  .admin-page .tab {
+    justify-content: center;
+    padding: 9px 2px;
+    font-size: 12px;
+  }
+
+  .admin-page .social-row .field::before {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    content: "名称";
+  }
+
+  .admin-page .social-row .field:nth-child(2)::before {
+    content: "链接";
+  }
+
+  .admin-page .social-row .field:nth-child(3)::before {
+    content: "图标";
+  }
+
+  .emoji-bar {
+    gap: 6px;
+  }
+
+  .emoji-btn {
+    padding: 2px 6px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 760px) {
   .admin-page .admin-section {
     padding: 22px 20px;
   }
